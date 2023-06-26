@@ -8,9 +8,7 @@ import com.bus.booking.repository.BusRepository;
 import com.bus.booking.repository.PassengerRepository;
 import com.bus.booking.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +34,12 @@ public class RestAPIController {
     public List<Bus> getBuses(){
         System.out.println("Calling getBuses API");
         return busRepository.findAll();
+    }
+
+    @PostMapping(path = "/addBus")
+    public Bus addBus(@RequestBody Bus bus){
+        System.out.println("Adding bus with id:"+ bus.getBusId());
+        return busRepository.save(bus);
     }
 
     @GetMapping(path = "/getBus/{busId}")
